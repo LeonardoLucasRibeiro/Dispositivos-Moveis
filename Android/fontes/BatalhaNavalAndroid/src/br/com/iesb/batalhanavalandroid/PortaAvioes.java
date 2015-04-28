@@ -2,7 +2,7 @@ package br.com.iesb.batalhanavalandroid;
 
 
 
-public class PortaAvioes extends Artilharia implements ArtilhariaInterface{
+public class PortaAvioes extends Artilharia {
 
 	private static final String TIPO = "PORTA AVIÕES";
 	private static final String SIGLA = "P";
@@ -12,7 +12,7 @@ public class PortaAvioes extends Artilharia implements ArtilhariaInterface{
 	}
 
 	
-	public void distribuiArtilharia(ArtilhariaAdapater objArtilhariaAdapter) {
+	public void distribuiElementos(BatalhaAdapater objArtilhariaAdapter) {
 		int	tamanhoCampoBatalha	=	objArtilhariaAdapter.getTamanhoCampoBatalha();
 		int itensCampoBatalha	=	tamanhoCampoBatalha * tamanhoCampoBatalha;
 		int	referenciaRandomica	=	(int) ( Math.random() * itensCampoBatalha);
@@ -49,7 +49,7 @@ public class PortaAvioes extends Artilharia implements ArtilhariaInterface{
 			getPosicoes().add(referencia+"");	
 		}
 		if(!validacao){
-			distribuiArtilharia(objArtilhariaAdapter);
+			distribuiElementos(objArtilhariaAdapter);
 		}else{
 		
 				//##########   Monta asa do Avi‹o ##############
@@ -83,7 +83,7 @@ public class PortaAvioes extends Artilharia implements ArtilhariaInterface{
 					getPosicoes().add(referencia+"");	
 				}
 				if(!validacao){
-					distribuiArtilharia(objArtilhariaAdapter);
+					distribuiElementos(objArtilhariaAdapter);
 				}else{
 					validacao = true;
 					//###########  Asa Direita #################
@@ -109,7 +109,7 @@ public class PortaAvioes extends Artilharia implements ArtilhariaInterface{
 						getPosicoes().add(referencia+"");	
 					}
 					if(!validacao){
-						distribuiArtilharia(objArtilhariaAdapter);
+						distribuiElementos(objArtilhariaAdapter);
 					}
 				}	
 		}		

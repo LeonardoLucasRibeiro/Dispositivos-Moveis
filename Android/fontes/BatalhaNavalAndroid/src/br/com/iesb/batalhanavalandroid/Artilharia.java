@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Artilharia {
+public class Artilharia implements ElementosInterface{
 	
 	private String tipo;
 	private String sigla;
@@ -42,5 +42,9 @@ public class Artilharia {
 	}
 	public void setPosicoes(List<String> posicoes) {
 		this.posicoes = posicoes;
+	}
+
+	public void distribuiElementos(BatalhaAdapater objArtilhariaAdapter) {
+		// TODO Auto-generated method stub
 	}
 }

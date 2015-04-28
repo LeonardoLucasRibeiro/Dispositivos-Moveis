@@ -4,7 +4,7 @@ import java.util.List;
 
 
 
-public class Navios  extends Artilharia implements ArtilhariaInterface{
+public class Navios  extends Artilharia{
 
 	private static final String TIPO = "NAVIO";
 	private static final String SIGLA = "N";
@@ -14,7 +14,7 @@ public class Navios  extends Artilharia implements ArtilhariaInterface{
 	}
 	
 	
-	public void distribuiArtilharia(ArtilhariaAdapater objArtilhariaAdapter) {
+	public void distribuiElementos(BatalhaAdapater objArtilhariaAdapter) {
 		int	tamanhoCampoBatalha	=	objArtilhariaAdapter.getTamanhoCampoBatalha();
 		int itensCampoBatalha	=	tamanhoCampoBatalha * tamanhoCampoBatalha;
 		int	referenciaRandomica	=	(int) ( Math.random() * itensCampoBatalha);
@@ -51,13 +51,9 @@ public class Navios  extends Artilharia implements ArtilhariaInterface{
 			getPosicoes().add(referencia+"");	
 		}
 		if(!validacao){
-			distribuiArtilharia(objArtilhariaAdapter);
+			distribuiElementos(objArtilhariaAdapter);
 		}
 		
 	}
 
-
-
-
-	
 }

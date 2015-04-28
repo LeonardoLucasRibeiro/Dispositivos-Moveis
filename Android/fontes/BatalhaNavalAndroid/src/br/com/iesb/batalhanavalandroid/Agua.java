@@ -2,11 +2,13 @@ package br.com.iesb.batalhanavalandroid;
 
 import java.util.List;
 
-public class Destrocos implements ElementosInterface{
+
+public class Agua implements ElementosInterface{
 
 	@Override
 	public void distribuiElementos(BatalhaAdapater objArtilhariaAdapter) {
-		// TODO Auto-generated method stub
+		objArtilhariaAdapter.getCampoBatalha().add(this);
+		
 	}
 
 	@Override
@@ -33,5 +35,6 @@ public class Destrocos implements ElementosInterface{
 		return null;
 	}
 
-	
+
+
 }
