@@ -55,7 +55,8 @@ public class ImageAdapter extends BaseAdapter {
     	for(int i=0; i<100; i++){
     		mThumbIds[i] = R.drawable.quadrado; 
     	}
-    }	
+    }
+
     // references to our images
    private Integer[] mThumbIds = new Integer[100];
 }

@@ -44,8 +44,8 @@ public class BatalhaAdapater <T extends ElementosInterface>{
 		agua					=	new Agua();
 		int itensCampoBatalha	=	tamanhoCampoBatalha * tamanhoCampoBatalha;		
 		for(int i=0;i<itensCampoBatalha;i++){
-			//campoBatalha.add(null);
-			agua.distribuiElementos(this);
+			campoBatalha.add(null);
+			//agua.distribuiElementos(this);
 		}
 	}
 	public void adicionaArtilharia(T artilharia){
@@ -70,6 +70,8 @@ public class BatalhaAdapater <T extends ElementosInterface>{
 				retorno =  "Destroco";
 			}else if(campoBatalha.get(referencia) instanceof Agua){
 				retorno =  "Agua";
+			}else{
+				campoBatalha.set(referencia,    (T) agua );
 			}
 			return retorno;
 	}	

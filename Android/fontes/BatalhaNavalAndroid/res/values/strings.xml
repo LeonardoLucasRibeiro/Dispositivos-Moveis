@@ -1,5 +1,7 @@
 <resources>
 
-    <string name="app_name">BatalhaNavalAndroid</string>
+    <string name="app_name">Batalha Naval</string>
+    <string name="player_1">Jogador 1</string>
+    <string name="player_2">Jogador 2</string>
 
 </resources>

@@ -92,14 +92,14 @@ public class MainActivity extends Activity {
 		
 		ImageAdapter  img 	= (ImageAdapter) parent.getAdapter();
         String tiro = artilhariaAdapterCampo.analisaTiro(position,lsitaArtilhariaCampo);
-        int imagem	= R.drawable.teste3;	
+        int imagem	= R.drawable.agua;	
         if(!tiro.equals("")){
         	if(tiro.equals("Acertou")){
         		imagem	= R.drawable.error;
         	}else if(tiro.equals("Destroco")){
         		imagem	= R.drawable.error;
         	}else if(tiro.equals("Agua")){
-        		imagem	= R.drawable.teste3;
+        		imagem	= R.drawable.agua;
         	}else{
         		imagem	= R.drawable.error;
         		explosao();
@@ -131,7 +131,7 @@ public class MainActivity extends Activity {
 		
 		artilhariaAdapterCampoA	= new BatalhaAdapater<ElementosInterface>(10);
 		lsitaArtilhariaCampoA 	= new ArrayList<Artilharia>();
-		artilhariaAdapterCampoA.setNomeJogador("Jogador 2");
+		artilhariaAdapterCampoA.setNomeJogador("Jogador 1");
 		
 		//1 porta avioes
 		PortaAvioes portaAviao = new PortaAvioes();
@@ -226,7 +226,7 @@ public class MainActivity extends Activity {
 		
 		artilhariaAdapterCampoB	= new BatalhaAdapater<ElementosInterface>(10);
 		lsitaArtilhariaCampoB 	= new ArrayList<Artilharia>();
-		artilhariaAdapterCampoB.setNomeJogador("Jogador 1");
+		artilhariaAdapterCampoB.setNomeJogador("Jogador 2");
 		//1 porta avioes
 		PortaAvioes portaAviao = new PortaAvioes();
 		portaAviao.setNome("TopGun");

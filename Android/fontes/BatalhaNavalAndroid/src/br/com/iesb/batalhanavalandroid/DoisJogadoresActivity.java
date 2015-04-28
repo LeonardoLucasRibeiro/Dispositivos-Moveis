@@ -21,6 +21,7 @@ public class DoisJogadoresActivity extends MainActivity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.main);
+	   
 	    iniciaArtilhariaJogador1();
 	    iniciaArtilhariaJogador2();
 	    artilhariaAdapterCampoA = getArtilhariaAdapterCampoA(); 
