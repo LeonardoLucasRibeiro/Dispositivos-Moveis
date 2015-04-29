@@ -8,6 +8,7 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -24,93 +25,162 @@ public class MainActivity extends Activity {
 	public BatalhaAdapater<ElementosInterface> getArtilhariaAdapterCampoA() {
 		return artilhariaAdapterCampoA;
 	}
-
-
 	public void setArtilhariaAdapterCampoA(
 			BatalhaAdapater<ElementosInterface> artilhariaAdapterCampoA) {
 		this.artilhariaAdapterCampoA = artilhariaAdapterCampoA;
 	}
-
-
 	public BatalhaAdapater<ElementosInterface> getArtilhariaAdapterCampoB() {
 		return artilhariaAdapterCampoB;
 	}
-
-
 	public void setArtilhariaAdapterCampoB(
 			BatalhaAdapater<ElementosInterface> artilhariaAdapterCampoB) {
 		this.artilhariaAdapterCampoB = artilhariaAdapterCampoB;
 	}
-
-
 	public List<Artilharia> getLsitaArtilhariaCampoA() {
 		return lsitaArtilhariaCampoA;
 	}
-
-
 	public void setLsitaArtilhariaCampoA(List<Artilharia> lsitaArtilhariaCampoA) {
 		this.lsitaArtilhariaCampoA = lsitaArtilhariaCampoA;
 	}
-
-
 	public List<Artilharia> getLsitaArtilhariaCampoB() {
 		return lsitaArtilhariaCampoB;
 	}
-
-
 	public void setLsitaArtilhariaCampoB(List<Artilharia> lsitaArtilhariaCampoB) {
 		this.lsitaArtilhariaCampoB = lsitaArtilhariaCampoB;
 	}
-
-	
-	
-	
 	public boolean isVezJogadorA() {
 		return vezJogadorA;
 	}
-
-
 	public void setVezJogadorA(boolean vezJogadorA) {
 		this.vezJogadorA = vezJogadorA;
 	}
-
-
 	public boolean isVezJogadorB() {
 		return vezJogadorB;
 	}
-
-
 	public void setVezJogadorB(boolean vezJogadorB) {
 		this.vezJogadorB = vezJogadorB;
 	}
 
-
+	
 	public void analisaTiro(AdapterView<?> parent, View v,int position, long id, 
+			BatalhaAdapater<ElementosInterface> artilhariaAdapterCampo, 
+			List<Artilharia> lsitaArtilhariaCampo,
+			Context context) {
+
+			ImageAdapter  img 	= (ImageAdapter) parent.getAdapter();
+			//String tiro = artilhariaAdapterCampo.analisaTiro(position);
+			
+			ElementosInterface elemnto = artilhariaAdapterCampo.analisaTiro(position);
+			int imagem	= R.drawable.agua;
+	        String tiro; 
+	        if(elemnto instanceof ElementosInterface){		
+	        		tiro = elemnto.getSituacao();
+	        }else{
+	        		tiro = "";
+	        }
+				
+			if(!tiro.equals("")){
+				if(tiro.equals("Acertou")){
+					imagem	= R.drawable.error;
+				}else if(tiro.equals("Destroco")){
+					imagem	= R.drawable.error;
+				}else if(tiro.equals("Agua")){
+					imagem	= R.drawable.agua;
+				}else{
+					imagem	= R.drawable.error;
+					explosao();
+					Toast.makeText(context, "" + "VOCÊ DESTRUIU O MEU "+elemnto.getTipo().toUpperCase()+" - "+elemnto.getNome().toUpperCase(),Toast.LENGTH_LONG).show();	            		
+				}
+			}else{
+				setVezJogadorA(!isVezJogadorA());
+				setVezJogadorB(!isVezJogadorB());
+			}
+			
+			//img.setmThumbId(position, imagem);
+			img.setImageView(v,imagem);
+			System.out.println(v);
+	
+							ImageAdapter imgDestrocos = (ImageAdapter)  img.getItem(0);
+							imgDestrocos.setImageView(v, R.drawable.seta_esquerda);
+			
+			if(tiro.equals("Eliminou")){
+				GridView gridview = (GridView) findViewById(artilhariaAdapterCampo.getResourceGrid());
+				imagem = R.drawable.navio_1_pos;
+	    		for(String item:elemnto.getPosicoes()){
+	    			//img.setmThumbId(Integer.parseInt(item), R.drawable.navio_1_pos);
+	    			View vw = (View)img.getView(Integer.parseInt(item), v, parent);
+	    			
+	    			img.setImageView(vw,imagem);
+	    			System.out.println(item);
+	    			System.out.println(vw);
+	    		}
+	    		
+	    		ImageAdapter imgDestrocos2 = (ImageAdapter) parent.getItemAtPosition(0);
+	    		imgDestrocos2.setImageView(v, imagem);
+
+//	    		gridview = (GridView) findViewById(artilhariaAdapterCampo.getResourceGrid());
+//	    		View vx = (View)gridview.getAdapter().getView(0, v, parent);
+//	    		img.setImageView(vx,imagem);
+//	    		System.out.println(vx);
+	    		//gridview.setAdapter(img);
+				
+			}
+			
+			if(artilhariaAdapterCampo.analisaCampoBatalha(lsitaArtilhariaCampo)){
+				Toast.makeText(context, "######## "+artilhariaAdapterCampo.getNomeJogador()+" CAMPEÃO #########" ,Toast.LENGTH_LONG).show();
+			}	
+}
+
+	public void analisaTiroOLD(AdapterView<?> parent, View v,int position, long id, 
 								BatalhaAdapater<ElementosInterface> artilhariaAdapterCampo, 
 								List<Artilharia> lsitaArtilhariaCampo,
 								Context context) {
 		
+		
+		
+		
+		
 		ImageAdapter  img 	= (ImageAdapter) parent.getAdapter();
-        String tiro = artilhariaAdapterCampo.analisaTiro(position,lsitaArtilhariaCampo);
+        ElementosInterface elemnto = artilhariaAdapterCampo.analisaTiro(position);
+        
+        String tiro; 
+        if(elemnto instanceof ElementosInterface)		
+        		tiro = elemnto.getSituacao();
+        else
+        		tiro = "";
         int imagem	= R.drawable.agua;	
+
+       
+       
+        	
         if(!tiro.equals("")){
         	if(tiro.equals("Acertou")){
         		imagem	= R.drawable.error;
-        	}else if(tiro.equals("Destroco")){
-        		imagem	= R.drawable.error;
-        	}else if(tiro.equals("Agua")){
-        		imagem	= R.drawable.agua;
-        	}else{
-        		imagem	= R.drawable.error;
-        		explosao();
-        		Toast.makeText(context, "" + tiro.toString(),Toast.LENGTH_LONG).show();	            		
-        	}
+            	img.setmThumbId(position, imagem);
+                img.setImageView(v,imagem);
+	        } 	
+	        if(tiro.equals("Eliminou")){
+	    		explosao();
+	    		Toast.makeText(context, "" + tiro.toString(),Toast.LENGTH_LONG).show();	 
+	    		//Redesenha o Grid com a  artilharia  que acabou de ser afundada
+//	    		for(String item:elemnto.getPosicoes()){
+//	    			img.setmThumbId(Integer.parseInt(item), R.drawable.navio_1_pos);
+//	    		}
+//	    		GridView gridview = (GridView) findViewById(artilhariaAdapterCampo.getResourceGrid());
+//	    	    gridview.setAdapter(img); 
+	        }
+
+        		
         }else{
-        	
-			setVezJogadorA(!isVezJogadorA());
+        	setVezJogadorA(!isVezJogadorA());
 			setVezJogadorB(!isVezJogadorB());
+			imagem	= R.drawable.agua;
+			img.setmThumbId(position, imagem);
+            img.setImageView(v,imagem);
         }
-        img.setImageView(v,imagem);
+        
+      
+      
 		if(artilhariaAdapterCampo.analisaCampoBatalha(lsitaArtilhariaCampo)){
 			Toast.makeText(context, "######## "+artilhariaAdapterCampo.getNomeJogador()+" CAMPEÃO #########" ,Toast.LENGTH_LONG).show();
 		}	
@@ -132,6 +202,7 @@ public class MainActivity extends Activity {
 		artilhariaAdapterCampoA	= new BatalhaAdapater<ElementosInterface>(10);
 		lsitaArtilhariaCampoA 	= new ArrayList<Artilharia>();
 		artilhariaAdapterCampoA.setNomeJogador("Jogador 1");
+		artilhariaAdapterCampoA.setResourceGrid(R.id.gridview);
 		
 		//1 porta avioes
 		PortaAvioes portaAviao = new PortaAvioes();
@@ -227,6 +298,7 @@ public class MainActivity extends Activity {
 		artilhariaAdapterCampoB	= new BatalhaAdapater<ElementosInterface>(10);
 		lsitaArtilhariaCampoB 	= new ArrayList<Artilharia>();
 		artilhariaAdapterCampoB.setNomeJogador("Jogador 2");
+		artilhariaAdapterCampoB.setResourceGrid(R.id.gridview2);
 		//1 porta avioes
 		PortaAvioes portaAviao = new PortaAvioes();
 		portaAviao.setNome("TopGun");

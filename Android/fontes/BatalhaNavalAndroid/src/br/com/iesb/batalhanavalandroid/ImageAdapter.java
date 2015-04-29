@@ -12,7 +12,6 @@ public class ImageAdapter extends BaseAdapter {
 
     public ImageAdapter(Context c) {
         mContext = c;
-        montaThumbs();
     }
 
     public int getCount() {
@@ -51,12 +50,33 @@ public class ImageAdapter extends BaseAdapter {
     
     
 
-    private void montaThumbs(){
+    public void iniciaMontaThumbs(){
     	for(int i=0; i<100; i++){
     		mThumbIds[i] = R.drawable.quadrado; 
     	}
     }
 
-    // references to our images
+
+    
+
+    public Integer[] getmThumbIds() {
+		return mThumbIds;
+	}
+
+	public void setmThumbIds(Integer[] mThumbIds) {
+		this.mThumbIds = mThumbIds;
+	}
+
+	 public int getmThumbId(int position) {
+			return mThumbIds[position];
+	}
+
+	public void setmThumbId(int position, int resource) {
+			this.mThumbIds[position] = resource;
+	}
+
+
+
+// references to our images
    private Integer[] mThumbIds = new Integer[100];
 }

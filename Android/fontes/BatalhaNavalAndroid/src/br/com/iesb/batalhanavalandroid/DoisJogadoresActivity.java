@@ -31,8 +31,10 @@ public class DoisJogadoresActivity extends MainActivity {
 	    setVezJogadorA(true);
 	    setVezJogadorB(false);
 	    
-	    GridView gridviewCampoA = (GridView) findViewById(R.id.gridview);
-	    gridviewCampoA.setAdapter(new ImageAdapter(this));
+	    GridView gridviewCampoA = (GridView) findViewById(artilhariaAdapterCampoA.getResourceGrid());
+	    ImageAdapter imageAdapter = new ImageAdapter(this);
+	    imageAdapter.iniciaMontaThumbs();
+	    gridviewCampoA.setAdapter(imageAdapter);
 	    gridviewCampoA.setOnItemClickListener(new OnItemClickListener() {
 	    	public void onItemClick(AdapterView<?> parent, View v,int position, long id) {
 	    		if(isVezJogadorB()){
@@ -42,8 +44,10 @@ public class DoisJogadoresActivity extends MainActivity {
 	    });
 	    
 	    
-	    GridView gridviewCampoB = (GridView) findViewById(R.id.gridview2);
-	    gridviewCampoB.setAdapter(new ImageAdapter(this));
+	    GridView gridviewCampoB = (GridView) findViewById(artilhariaAdapterCampoB.getResourceGrid());
+	    ImageAdapter imageAdapter2 = new ImageAdapter(this);
+	    imageAdapter2.iniciaMontaThumbs();
+	    gridviewCampoB.setAdapter(imageAdapter2);
 	    gridviewCampoB.setOnItemClickListener(new OnItemClickListener() {
 	    	public void onItemClick(AdapterView<?> parent, View v,int position, long id) {
 	    		if(isVezJogadorA()){

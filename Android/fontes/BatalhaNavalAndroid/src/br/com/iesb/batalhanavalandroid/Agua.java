@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Agua implements ElementosInterface{
 
+	private String situacao;
+	
 	@Override
 	public void distribuiElementos(BatalhaAdapater objArtilhariaAdapter) {
 		objArtilhariaAdapter.getCampoBatalha().add(this);
@@ -34,6 +36,15 @@ public class Agua implements ElementosInterface{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public String getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
+	}
+
 
 
 

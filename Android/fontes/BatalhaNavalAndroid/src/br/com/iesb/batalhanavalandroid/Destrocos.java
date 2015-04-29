@@ -3,6 +3,8 @@ package br.com.iesb.batalhanavalandroid;
 import java.util.List;
 
 public class Destrocos implements ElementosInterface{
+	
+	private String situacao;
 
 	@Override
 	public void distribuiElementos(BatalhaAdapater objArtilhariaAdapter) {
@@ -31,6 +33,14 @@ public class Destrocos implements ElementosInterface{
 	public String getSigla() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public String getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
 	}
 
 	

@@ -9,4 +9,6 @@ public interface ElementosInterface {
 	public String getTipo();
 	public String getNome();
 	public String getSigla();
+	public String getSituacao();
+	public void setSituacao(String situacao);
 }

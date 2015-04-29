@@ -9,6 +9,7 @@ public class Artilharia implements ElementosInterface{
 	private String tipo;
 	private String sigla;
 	private String nome;
+	private String situacao;
 	private int	tamanho;
 	private List<String> posicoes = new ArrayList<String>();
 	
@@ -31,6 +32,12 @@ public class Artilharia implements ElementosInterface{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	public String getSituacao() {
+		return situacao;
+	}
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
+	}
 	public int getTamanho() {
 		return tamanho;
 	}
@@ -44,6 +51,8 @@ public class Artilharia implements ElementosInterface{
 		this.posicoes = posicoes;
 	}
 
+	
+	
 	public void distribuiElementos(BatalhaAdapater objArtilhariaAdapter) {
 		// TODO Auto-generated method stub
 	}
