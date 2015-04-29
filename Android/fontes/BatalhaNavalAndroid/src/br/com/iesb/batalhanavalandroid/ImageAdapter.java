@@ -1,5 +1,7 @@
 package br.com.iesb.batalhanavalandroid;
 
+import java.util.List;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +59,14 @@ public class ImageAdapter extends BaseAdapter {
     }
 
 
+    public void iniciaMontaThumbsJogador( List<Artilharia> listaArtilhariaJogador){
+    	for(Artilharia artilharia : listaArtilhariaJogador){
+    		for(String item: artilharia.getPosicoes()){
+    			mThumbIds[Integer.parseInt(item)] = R.drawable.seta_direita;
+    		}	
+    	}
+    }
+    
     
 
     public Integer[] getmThumbIds() {

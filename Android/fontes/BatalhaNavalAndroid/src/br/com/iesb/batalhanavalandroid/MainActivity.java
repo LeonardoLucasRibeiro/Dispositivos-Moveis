@@ -67,134 +67,54 @@ public class MainActivity extends Activity {
 			List<Artilharia> lsitaArtilhariaCampo,
 			Context context) {
 
-			ImageAdapter  img 	= (ImageAdapter) parent.getAdapter();
-			//String tiro = artilhariaAdapterCampo.analisaTiro(position);
-			
-			ElementosInterface elemnto = artilhariaAdapterCampo.analisaTiro(position);
-			int imagem	= R.drawable.agua;
-	        String tiro; 
+			ImageAdapter  img 			= (ImageAdapter) parent.getAdapter();
+			ElementosInterface elemnto 	= artilhariaAdapterCampo.analisaTiro(position);
+			int imagem					= R.drawable.agua;
+	        String tiro					= ""; 
+	        
 	        if(elemnto instanceof ElementosInterface){		
 	        		tiro = elemnto.getSituacao();
-	        }else{
-	        		tiro = "";
 	        }
-				
-			if(!tiro.equals("")){
+			
+	        if(!tiro.equals("")){
 				if(tiro.equals("Acertou")){
 					imagem	= R.drawable.error;
+					img.setmThumbId(position, imagem);
+					img.setImageView(v,imagem);
 				}else if(tiro.equals("Destroco")){
-					imagem	= R.drawable.error;
+					//imagem	= R.drawable.error;
 				}else if(tiro.equals("Agua")){
-					imagem	= R.drawable.agua;
+					//imagem	= R.drawable.agua;
 				}else{
-					imagem	= R.drawable.error;
+					imagem	= R.drawable.navio_1_pos;
 					explosao();
-					Toast.makeText(context, "" + "VOCÊ DESTRUIU O MEU "+elemnto.getTipo().toUpperCase()+" - "+elemnto.getNome().toUpperCase(),Toast.LENGTH_LONG).show();	            		
+					Toast.makeText(context, "" + "VOCÊ DESTRUIU O MEU "+elemnto.getTipo().toUpperCase()+" - "+elemnto.getNome().toUpperCase(),Toast.LENGTH_SHORT).show();
+					GridView gridview = (GridView) findViewById(artilhariaAdapterCampo.getResourceGrid());
+					for(String item : elemnto.getPosicoes()){
+						img.setmThumbId(Integer.parseInt(item), imagem);
+		    		}
+					gridview.setAdapter(img);
 				}
 			}else{
 				setVezJogadorA(!isVezJogadorA());
 				setVezJogadorB(!isVezJogadorB());
+				img.setmThumbId(position, imagem);
+				img.setImageView(v,imagem);
 			}
-			
-			//img.setmThumbId(position, imagem);
-			img.setImageView(v,imagem);
-			System.out.println(v);
-	
-							ImageAdapter imgDestrocos = (ImageAdapter)  img.getItem(0);
-							imgDestrocos.setImageView(v, R.drawable.seta_esquerda);
-			
-			if(tiro.equals("Eliminou")){
-				GridView gridview = (GridView) findViewById(artilhariaAdapterCampo.getResourceGrid());
-				imagem = R.drawable.navio_1_pos;
-	    		for(String item:elemnto.getPosicoes()){
-	    			//img.setmThumbId(Integer.parseInt(item), R.drawable.navio_1_pos);
-	    			View vw = (View)img.getView(Integer.parseInt(item), v, parent);
-	    			
-	    			img.setImageView(vw,imagem);
-	    			System.out.println(item);
-	    			System.out.println(vw);
-	    		}
-	    		
-	    		ImageAdapter imgDestrocos2 = (ImageAdapter) parent.getItemAtPosition(0);
-	    		imgDestrocos2.setImageView(v, imagem);
-
-//	    		gridview = (GridView) findViewById(artilhariaAdapterCampo.getResourceGrid());
-//	    		View vx = (View)gridview.getAdapter().getView(0, v, parent);
-//	    		img.setImageView(vx,imagem);
-//	    		System.out.println(vx);
-	    		//gridview.setAdapter(img);
-				
-			}
-			
+	        
+			//Verifica se todos os objetos foram destruios no campo de guerra em questão
 			if(artilhariaAdapterCampo.analisaCampoBatalha(lsitaArtilhariaCampo)){
 				Toast.makeText(context, "######## "+artilhariaAdapterCampo.getNomeJogador()+" CAMPEÃO #########" ,Toast.LENGTH_LONG).show();
 			}	
-}
+	}
 
-	public void analisaTiroOLD(AdapterView<?> parent, View v,int position, long id, 
-								BatalhaAdapater<ElementosInterface> artilhariaAdapterCampo, 
-								List<Artilharia> lsitaArtilhariaCampo,
-								Context context) {
-		
-		
-		
-		
-		
-		ImageAdapter  img 	= (ImageAdapter) parent.getAdapter();
-        ElementosInterface elemnto = artilhariaAdapterCampo.analisaTiro(position);
-        
-        String tiro; 
-        if(elemnto instanceof ElementosInterface)		
-        		tiro = elemnto.getSituacao();
-        else
-        		tiro = "";
-        int imagem	= R.drawable.agua;	
-
-       
-       
-        	
-        if(!tiro.equals("")){
-        	if(tiro.equals("Acertou")){
-        		imagem	= R.drawable.error;
-            	img.setmThumbId(position, imagem);
-                img.setImageView(v,imagem);
-	        } 	
-	        if(tiro.equals("Eliminou")){
-	    		explosao();
-	    		Toast.makeText(context, "" + tiro.toString(),Toast.LENGTH_LONG).show();	 
-	    		//Redesenha o Grid com a  artilharia  que acabou de ser afundada
-//	    		for(String item:elemnto.getPosicoes()){
-//	    			img.setmThumbId(Integer.parseInt(item), R.drawable.navio_1_pos);
-//	    		}
-//	    		GridView gridview = (GridView) findViewById(artilhariaAdapterCampo.getResourceGrid());
-//	    	    gridview.setAdapter(img); 
-	        }
-
-        		
-        }else{
-        	setVezJogadorA(!isVezJogadorA());
-			setVezJogadorB(!isVezJogadorB());
-			imagem	= R.drawable.agua;
-			img.setmThumbId(position, imagem);
-            img.setImageView(v,imagem);
-        }
-        
-      
-      
-		if(artilhariaAdapterCampo.analisaCampoBatalha(lsitaArtilhariaCampo)){
-			Toast.makeText(context, "######## "+artilhariaAdapterCampo.getNomeJogador()+" CAMPEÃO #########" ,Toast.LENGTH_LONG).show();
-		}	
-    }
 	
 	public void explosao(){
 		MediaPlayer musica = MediaPlayer.create(this, R.raw.explosao);
 	    musica.start();
 	}
 	
-	public void fim(){
-		MediaPlayer musica = MediaPlayer.create(this, R.raw.hino);
-	    musica.start();
-	}
+	
 
 	
 	public void iniciaArtilhariaJogador1(){

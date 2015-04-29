@@ -10,8 +10,8 @@ public class BatalhaAdapater <T extends ElementosInterface>{
 	
 	private List<T> 					campoBatalha;
 	private int 						tamanhoCampoBatalha;
-	private Destrocos 					destroco;	
-	private Agua						agua;
+	//private Destrocos 					destroco;	
+	//private Agua						agua;
 	private String 						nomeJogador;
 	private int							resourceGrid;
 
@@ -47,8 +47,8 @@ public class BatalhaAdapater <T extends ElementosInterface>{
 	public BatalhaAdapater(int tamanho){
 		tamanhoCampoBatalha		=	tamanho;
 		campoBatalha 			=	new ArrayList<T>();
-		destroco				=	new Destrocos();
-		agua					=	new Agua();
+		//destroco				=	new Destrocos();
+		//agua					=	new Agua();
 		int itensCampoBatalha	=	tamanhoCampoBatalha * tamanhoCampoBatalha;		
 		for(int i=0;i<itensCampoBatalha;i++){
 			campoBatalha.add(null);
@@ -63,17 +63,16 @@ public class BatalhaAdapater <T extends ElementosInterface>{
 	}
 	public ElementosInterface analisaTiro(int  referencia){
 			T	artilharia = campoBatalha.get(referencia);
-			
+			Destrocos destroco;
 			if(artilharia instanceof Artilharia){
+					destroco = new Destrocos();
+					destroco.setSituacao("Destroco");
 					campoBatalha.set(referencia,    (T) destroco );
 					if(!campoBatalha.contains(artilharia)){
 						artilharia.setSituacao("Eliminou");
-						//retorno =  "VOCÊ DESTRUIU O MEU "+artilharia.getTipo().toUpperCase()+" - "+artilharia.getNome().toUpperCase();
-						//retorno = "eliminou";
 						System.out.println("Uauuuu!!!! Voce acabou de destruir totalmente o meu "+artilharia.getTipo()+" - "+artilharia.getNome());
 					}else{
 						artilharia.setSituacao("Acertou");
-						//retorno =  "Acertou";
 						System.out.println("Você acabou de acertar uma parte do meu "+artilharia.getTipo()+" - "+artilharia.getNome());
 					}
 			}else if(campoBatalha.get(referencia) instanceof Destrocos){
@@ -83,7 +82,7 @@ public class BatalhaAdapater <T extends ElementosInterface>{
 				artilharia.setSituacao("Agua");
 				//retorno =  "Agua";
 			}else{
-				campoBatalha.set(referencia,    (T) agua );
+				campoBatalha.set(referencia,    (T) new Agua() );
 				//artilharia = (T) new Agua();
 				//artilharia.setSituacao("");
 			}
@@ -91,7 +90,7 @@ public class BatalhaAdapater <T extends ElementosInterface>{
 			
 			return artilharia;
 	}	
-	
+/*	
 	
 	public String analisaTiro___(int  referencia){
 		String retorno	=	"";
@@ -114,6 +113,7 @@ public class BatalhaAdapater <T extends ElementosInterface>{
 		}
 		return retorno;
 	}
+*/	
 	public boolean analisaCampoBatalha(List<Artilharia> lista){
 		boolean fimJogo = 	true;
 		for(Artilharia item : lista){
