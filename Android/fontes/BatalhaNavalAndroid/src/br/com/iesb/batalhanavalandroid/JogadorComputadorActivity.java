@@ -29,8 +29,8 @@ public class JogadorComputadorActivity extends MainActivity {
 		lsitaArtilhariaCampoB	= getLsitaArtilhariaCampoB();
 		
 		
-	    setVezJogadorA(true);
-	    setVezJogadorB(false);
+	    setVezJogadorA(false);
+	    setVezJogadorB(true);
 	    
 	    // Campo de Batalha do Computador
 	    GridView gridviewCampoA = (GridView) findViewById(artilhariaAdapterCampoA.getResourceGrid());
@@ -39,12 +39,13 @@ public class JogadorComputadorActivity extends MainActivity {
 	    gridviewCampoA.setAdapter(imageAdapter);
 	    gridviewCampoA.setOnItemClickListener(new OnItemClickListener() {
 	    	public void onItemClick(AdapterView<?> parent, View v,int position, long id) {
-	    		if(isVezJogadorA()){
+	    		//if(isVezJogadorA()){
 	    			analisaTiro(parent, v, position, id, artilhariaAdapterCampoA, lsitaArtilhariaCampoA, JogadorComputadorActivity.this);
 	    			//jogadaComputador( (GridView) findViewById(artilhariaAdapterCampoB.getResourceGrid()) );
-	    			jogadaComputador();
-	    		}
+	    			//jogadaComputador();
+	    		//}
 	        }
+	    	
 	    	
 	    	
 	    });
@@ -65,19 +66,55 @@ public class JogadorComputadorActivity extends MainActivity {
 	        }
 	    });
 
+
 	    
-	   
+	    
+	    ////#################		TENTAR FAZER DA MESMA FORMA QUE DESENHA UMA ELIMINACAO TOTAL!!!
+	    
+	    
+
+	    
+	    //jogadaComputador("Normal"); 
+	    
+	    Thread thread = new Thread() {          
+            public void run() {
+                boolean isComputadorJoga = true;
+                try {
+                    while(isComputadorJoga) {
+
+                        sleep(100);
+
+                        runOnUiThread(new Runnable() {  
+	                        @Override
+	                        public void run() {
+	                        	jogadaComputador("Thread");
+
+	                        }
+                        });
+                    }
+                   
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                
+            };
+        };
+        thread.start();	
+	
+	    
 	    //gridviewCampoB.performItemClick( gridviewCampoB.getAdapter().getView(1, null, null), 0, gridviewCampoB.getAdapter().getItemId(1)) ;
 	    //jogadaComputador(gridviewCampoB);
 	    
-	    
+	  
 	}
 	
 	
-	public void jogadaComputador(){
-			System.out.println("COMPUTADOR JOGANDO");
-			gridviewCampoB.performItemClick( gridviewCampoB.getAdapter().getView(1, null, null), 5, gridviewCampoB.getAdapter().getItemId(1)) ;
+	public void jogadaComputador(String x){
+		if(isVezJogadorB()){
+    		System.out.println("COMPUTADOR JOGANDO: "+x);
+    		int num  = (int) ( Math.random() * 100);
+    		gridviewCampoB.performItemClick( gridviewCampoB.getAdapter().getView(1, null, null), num, gridviewCampoB.getAdapter().getItemId(1)) ;
+    	}	
 	}
-	
-	
+
 }

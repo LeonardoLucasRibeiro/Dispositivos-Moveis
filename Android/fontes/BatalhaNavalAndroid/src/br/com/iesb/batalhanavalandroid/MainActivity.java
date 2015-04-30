@@ -75,7 +75,8 @@ public class MainActivity extends Activity {
 	        if(elemnto instanceof ElementosInterface){		
 	        		tiro = elemnto.getSituacao();
 	        }
-			
+
+	        System.out.println("tiro:"+tiro);
 	        if(!tiro.equals("")){
 				if(tiro.equals("Acertou")){
 					imagem	= R.drawable.error;
@@ -90,6 +91,7 @@ public class MainActivity extends Activity {
 					explosao();
 					Toast.makeText(context, "" + "VOCÊ DESTRUIU O MEU "+elemnto.getTipo().toUpperCase()+" - "+elemnto.getNome().toUpperCase(),Toast.LENGTH_SHORT).show();
 					GridView gridview = (GridView) findViewById(artilhariaAdapterCampo.getResourceGrid());
+					
 					for(String item : elemnto.getPosicoes()){
 						img.setmThumbId(Integer.parseInt(item), imagem);
 		    		}
@@ -100,7 +102,13 @@ public class MainActivity extends Activity {
 				setVezJogadorB(!isVezJogadorB());
 				img.setmThumbId(position, imagem);
 				img.setImageView(v,imagem);
+				System.out.println("passu pela imagem");
 			}
+	        
+	        System.out.println(position);
+	        System.out.println(imagem);
+	        System.out.println(v);
+	        System.out.println(img);
 	        
 			//Verifica se todos os objetos foram destruios no campo de guerra em questão
 			if(artilhariaAdapterCampo.analisaCampoBatalha(lsitaArtilhariaCampo)){
