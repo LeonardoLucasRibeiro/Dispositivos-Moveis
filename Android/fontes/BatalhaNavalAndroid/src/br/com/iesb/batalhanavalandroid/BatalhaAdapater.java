@@ -70,10 +70,10 @@ public class BatalhaAdapater <T extends ElementosInterface>{
 					campoBatalha.set(referencia,    (T) destroco );
 					if(!campoBatalha.contains(artilharia)){
 						artilharia.setSituacao("Eliminou");
-						System.out.println("Uauuuu!!!! Voce acabou de destruir totalmente o meu "+artilharia.getTipo()+" - "+artilharia.getNome());
+						//System.out.println("Uauuuu!!!! Voce acabou de destruir totalmente o meu "+artilharia.getTipo()+" - "+artilharia.getNome());
 					}else{
 						artilharia.setSituacao("Acertou");
-						System.out.println("Você acabou de acertar uma parte do meu "+artilharia.getTipo()+" - "+artilharia.getNome());
+						//System.out.println("Você acabou de acertar uma parte do meu "+artilharia.getTipo()+" - "+artilharia.getNome());
 					}
 			}else if(campoBatalha.get(referencia) instanceof Destrocos){
 				artilharia.setSituacao("Destroco");
@@ -90,30 +90,7 @@ public class BatalhaAdapater <T extends ElementosInterface>{
 			
 			return artilharia;
 	}	
-/*	
-	
-	public String analisaTiro___(int  referencia){
-		String retorno	=	"";
-		if(campoBatalha.get(referencia) instanceof Artilharia){
-				T	artilharia = campoBatalha.get(referencia);
-				campoBatalha.set(referencia,    (T) destroco );
-				if(!campoBatalha.contains(artilharia)){
-					retorno =  "VOCÊ DESTRUIU O MEU "+artilharia.getTipo().toUpperCase()+" - "+artilharia.getNome().toUpperCase();
-					System.out.println("Uauuuu!!!! Voce acabou de destruir totalmente o meu "+artilharia.getTipo()+" - "+artilharia.getNome());
-				}else{
-					retorno =  "Acertou";
-					System.out.println("Você acabou de acertar uma parte do meu "+artilharia.getTipo()+" - "+artilharia.getNome());
-				}
-		}else if(campoBatalha.get(referencia) instanceof Destrocos){
-			retorno =  "Destroco";
-		}else if(campoBatalha.get(referencia) instanceof Agua){
-			retorno =  "Agua";
-		}else{
-			campoBatalha.set(referencia,    (T) agua );
-		}
-		return retorno;
-	}
-*/	
+
 	public boolean analisaCampoBatalha(List<Artilharia> lista){
 		boolean fimJogo = 	true;
 		for(Artilharia item : lista){

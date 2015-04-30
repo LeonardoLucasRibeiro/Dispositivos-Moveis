@@ -3,5 +3,6 @@
     <string name="app_name">Batalha Naval</string>
     <string name="player_1">Jogador 1</string>
     <string name="player_2">Jogador 2</string>
-
+    <string name="jogador_jopgador">2 Jogadores</string>
+    <string name="jogador_computador">Jogador Vs Computador</string>
 </resources>

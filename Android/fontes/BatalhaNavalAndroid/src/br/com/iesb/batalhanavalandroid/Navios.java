@@ -28,7 +28,17 @@ public class Navios  extends Artilharia{
 			direcao	= tamanhoCampoBatalha;
 		}
 	
+		//Por enquanto fica fixo a direção	
+		direcao				=	1;
+		
 		getPosicoes().clear();
+		getImagens().clear();
+		getImagensOff().clear();
+//		List imagens =	null;
+//		if(this.getTamanho() == 1){
+//			imagens = MainActivity.barcoTamanho1;
+//			System.out.println(imagens);
+//		}
 		//Adiciona ao List de Strings os possiveis candidatos
 		for(int i= 0; i<this.getTamanho();i++){
 			referencia	=	referenciaRandomica + (i*direcao);
@@ -48,7 +58,24 @@ public class Navios  extends Artilharia{
 					validacao = false;
 					break;	
 			}
-			getPosicoes().add(referencia+"");	
+			getPosicoes().add(referencia+"");
+			
+			
+			if(this.getTamanho() ==1){ 
+				getImagens().put(  referencia, (Integer) MainActivity.barcoTamanho1.get(i) );
+				getImagensOff().put(  referencia, (Integer) MainActivity.barcoTamanho1_Off.get(i) );
+			}else if(this.getTamanho() == 2){
+				getImagens().put(referencia, (Integer) MainActivity.barcoTamanho2.get(i));
+				getImagensOff().put(  referencia, (Integer) MainActivity.barcoTamanho2_Off.get(i) );
+			}else if(this.getTamanho() == 3){
+				getImagens().put(referencia, (Integer) MainActivity.barcoTamanho3.get(i));
+				getImagensOff().put(  referencia, (Integer) MainActivity.barcoTamanho3_Off.get(i) );
+			}else{ 
+				getImagens().put(referencia, (Integer) MainActivity.barcoTamanho4.get(i));
+				getImagensOff().put(  referencia, (Integer) MainActivity.barcoTamanho4_Off.get(i) );
+			}	
+			
+			
 		}
 		if(!validacao){
 			distribuiElementos(objArtilhariaAdapter);

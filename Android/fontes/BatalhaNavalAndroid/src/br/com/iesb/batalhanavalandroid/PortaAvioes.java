@@ -27,6 +27,8 @@ public class PortaAvioes extends Artilharia {
 		}
 	
 		getPosicoes().clear();
+		getImagens().clear();
+		getImagensOff().clear();
 		//Adiciona ao List de Strings os possiveis candidatos
 		for(int i= 0; i<this.getTamanho();i++){
 			referencia	=	referenciaRandomica + (i*direcao);
@@ -47,6 +49,8 @@ public class PortaAvioes extends Artilharia {
 					break;	
 			}
 			getPosicoes().add(referencia+"");	
+			getImagens().put(  referencia, (Integer) MainActivity.portaAvioes.get(0) );
+			getImagensOff().put(  referencia, (Integer) MainActivity.portaAvioes_Off.get(0) );
 		}
 		if(!validacao){
 			distribuiElementos(objArtilhariaAdapter);
@@ -80,7 +84,9 @@ public class PortaAvioes extends Artilharia {
 							validacao = false;
 							break;	
 					}
-					getPosicoes().add(referencia+"");	
+					getPosicoes().add(referencia+"");
+					getImagens().put(  referencia, (Integer) MainActivity.portaAvioes.get(0) );
+					getImagensOff().put(  referencia, (Integer) MainActivity.portaAvioes_Off.get(0) );
 				}
 				if(!validacao){
 					distribuiElementos(objArtilhariaAdapter);
@@ -106,7 +112,9 @@ public class PortaAvioes extends Artilharia {
 								validacao = false;
 								break;	
 						}
-						getPosicoes().add(referencia+"");	
+						getPosicoes().add(referencia+"");
+						getImagens().put(  referencia, (Integer) MainActivity.portaAvioes.get(0) );
+						getImagensOff().put(  referencia, (Integer) MainActivity.portaAvioes_Off.get(0) );
 					}
 					if(!validacao){
 						distribuiElementos(objArtilhariaAdapter);

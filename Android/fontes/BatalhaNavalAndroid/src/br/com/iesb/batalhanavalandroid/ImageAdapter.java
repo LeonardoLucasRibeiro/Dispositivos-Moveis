@@ -1,5 +1,6 @@
 package br.com.iesb.batalhanavalandroid;
 
+import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
@@ -60,9 +61,13 @@ public class ImageAdapter extends BaseAdapter {
 
 
     public void iniciaMontaThumbsJogador( List<Artilharia> listaArtilhariaJogador){
+    	//HashMap<Integer, Integer> mapsDeBarcos = MainActivity.barcoTamanho1;
+    	int tamamanhoArtilharia;
+    	int imagem;
+    	HashMap<Integer, Integer> mapsDeBarcos;
     	for(Artilharia artilharia : listaArtilhariaJogador){
     		for(String item: artilharia.getPosicoes()){
-    			mThumbIds[Integer.parseInt(item)] = R.drawable.seta_direita;
+    			mThumbIds[Integer.parseInt(item)] =  artilharia.getImagens().get(Integer.parseInt(item)); 
     		}	
     	}
     }

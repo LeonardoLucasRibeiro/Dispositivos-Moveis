@@ -12,6 +12,6 @@ public class AberturaActivity extends Activity {
 	}
 	
 	public void iniciaJogo(View v){
-		startActivity(new Intent(this,DoisJogadoresActivity.class));
+		startActivity(new Intent(this,MenuActivity.class));
 	}
 }

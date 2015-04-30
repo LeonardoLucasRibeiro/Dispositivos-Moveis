@@ -1,6 +1,7 @@
 package br.com.iesb.batalhanavalandroid;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
@@ -20,7 +21,20 @@ public class MainActivity extends Activity {
 	private boolean vezJogadorA;
 	private boolean vezJogadorB;
 	
+	static List<Integer> barcoTamanho1;
+	static List<Integer> barcoTamanho2;
+	static List<Integer> barcoTamanho3;
+	static List<Integer> barcoTamanho4;
+	
+	static List<Integer> portaAvioes;
+	
+	
+	static List<Integer> barcoTamanho1_Off;
+	static List<Integer> barcoTamanho2_Off;
+	static List<Integer> barcoTamanho3_Off;
+	static List<Integer> barcoTamanho4_Off;
 
+	static List<Integer> portaAvioes_Off;
 	
 	public BatalhaAdapater<ElementosInterface> getArtilhariaAdapterCampoA() {
 		return artilhariaAdapterCampoA;
@@ -76,7 +90,6 @@ public class MainActivity extends Activity {
 	        		tiro = elemnto.getSituacao();
 	        }
 
-	        System.out.println("tiro:"+tiro);
 	        if(!tiro.equals("")){
 				if(tiro.equals("Acertou")){
 					imagem	= R.drawable.error;
@@ -87,28 +100,21 @@ public class MainActivity extends Activity {
 				}else if(tiro.equals("Agua")){
 					//imagem	= R.drawable.agua;
 				}else{
-					imagem	= R.drawable.navio_1_pos;
 					explosao();
-					Toast.makeText(context, "" + "VOCÊ DESTRUIU O MEU "+elemnto.getTipo().toUpperCase()+" - "+elemnto.getNome().toUpperCase(),Toast.LENGTH_SHORT).show();
+					//Toast.makeText(context, "" + "FOI DESTRUIDO O "+elemnto.getTipo().toUpperCase()+" - "+elemnto.getNome().toUpperCase(),Toast.LENGTH_SHORT).show();
 					GridView gridview = (GridView) findViewById(artilhariaAdapterCampo.getResourceGrid());
-					
 					for(String item : elemnto.getPosicoes()){
+						imagem = elemnto.getImagensOff().get(Integer.parseInt(item));
 						img.setmThumbId(Integer.parseInt(item), imagem);
 		    		}
 					gridview.setAdapter(img);
 				}
 			}else{
-				setVezJogadorA(!isVezJogadorA());
-				setVezJogadorB(!isVezJogadorB());
 				img.setmThumbId(position, imagem);
 				img.setImageView(v,imagem);
-				System.out.println("passu pela imagem");
+				setVezJogadorA(!isVezJogadorA());
+				setVezJogadorB(!isVezJogadorB());
 			}
-	        
-	        System.out.println(position);
-	        System.out.println(imagem);
-	        System.out.println(v);
-	        System.out.println(img);
 	        
 			//Verifica se todos os objetos foram destruios no campo de guerra em questão
 			if(artilhariaAdapterCampo.analisaCampoBatalha(lsitaArtilhariaCampo)){
@@ -116,6 +122,59 @@ public class MainActivity extends Activity {
 			}	
 	}
 
+	
+	public String analisaTiroComputador(
+										int position, 
+										BatalhaAdapater<ElementosInterface> artilhariaAdapterCampo, 
+										List<Artilharia> lsitaArtilhariaCampo,
+										Context context) {
+
+			
+			GridView gridview 			= (GridView) findViewById(artilhariaAdapterCampo.getResourceGrid());
+			ImageAdapter  img 			= (ImageAdapter) gridview.getAdapter();
+			ElementosInterface elemnto 	= artilhariaAdapterCampo.analisaTiro(position);
+			int imagem					= R.drawable.agua;
+	        String tiro					= ""; 
+	        
+	        if(elemnto instanceof ElementosInterface){		
+	        		tiro = elemnto.getSituacao();
+	        }
+
+	        if(!tiro.equals("")){
+				if(tiro.equals("Acertou")){
+					imagem	= R.drawable.error;
+					img.setmThumbId(position, imagem);
+				}else if(tiro.equals("Destroco")){
+					
+				}else if(tiro.equals("Agua")){
+					
+				}else{
+					//Toast.makeText(context, "" + "FOI DESTRUIDO O  "+elemnto.getTipo().toUpperCase()+" - "+elemnto.getNome().toUpperCase(),Toast.LENGTH_SHORT).show();
+					//Chama o som de explosão, neste caso quando um aartilharia é totalmente destruida.
+					explosao();
+					//Monta as imagens da Artilharia totalmente destruida
+					for(String item : elemnto.getPosicoes()){
+						imagem = elemnto.getImagensOff().get(Integer.parseInt(item));
+						img.setmThumbId(Integer.parseInt(item), imagem);
+		    		}
+				}
+			}else{
+				setVezJogadorA(!isVezJogadorA());
+				setVezJogadorB(!isVezJogadorB());
+				img.setmThumbId(position, imagem);
+			}
+	        
+	        //Desenha os objetos (imagens) na Grid de acordo com o array de imagens
+	        gridview.setAdapter(img);
+			//Verifica se todos os objetos foram destruios no campo de guerra em questão
+			if(artilhariaAdapterCampo.analisaCampoBatalha(lsitaArtilhariaCampo)){
+				Toast.makeText(context, "######## "+artilhariaAdapterCampo.getNomeJogador()+" CAMPEÃO #########" ,Toast.LENGTH_LONG).show();
+			}	
+		
+			return tiro;
+	}
+	
+	
 	
 	public void explosao(){
 		MediaPlayer musica = MediaPlayer.create(this, R.raw.explosao);
@@ -314,5 +373,59 @@ public class MainActivity extends Activity {
 		setLsitaArtilhariaCampoB(lsitaArtilhariaCampoB);
 	}
 	
+	
+	public void criaHashMapBarcos(){
+		
+		//Montando as Imagens ON
+		
+		portaAvioes = new ArrayList<Integer>();
+		portaAvioes.add(R.drawable.barco1a);
+		
+		
+		barcoTamanho1 = new ArrayList<Integer>();
+		barcoTamanho1.add(R.drawable.barco1_on);
+		
+		barcoTamanho2 = new ArrayList<Integer>();
+		barcoTamanho2.add(R.drawable.barco2a);
+		barcoTamanho2.add(R.drawable.barco2b);
+		
+		barcoTamanho3 = new ArrayList<Integer>();
+		barcoTamanho3.add(R.drawable.barco3a);
+		barcoTamanho3.add(R.drawable.barco3b);
+		barcoTamanho3.add(R.drawable.barco3c);
+
+		barcoTamanho4 = new ArrayList<Integer>();
+		barcoTamanho4.add(R.drawable.barco4a);
+		barcoTamanho4.add(R.drawable.barco4b);
+		barcoTamanho4.add(R.drawable.barco4c);
+		barcoTamanho4.add(R.drawable.barco4d);
+		
+		
+		//Montando as Imagens OFF
+		
+		portaAvioes_Off = new ArrayList<Integer>();
+		portaAvioes_Off.add(R.drawable.barco1a_off);
+		
+		barcoTamanho1_Off = new ArrayList<Integer>();
+		barcoTamanho1_Off.add(R.drawable.barco1_off);
+		
+		barcoTamanho2_Off = new ArrayList<Integer>();
+		barcoTamanho2_Off.add(R.drawable.barco2a_off);
+		barcoTamanho2_Off.add(R.drawable.barco2b_off);
+		
+		barcoTamanho3_Off = new ArrayList<Integer>();
+		barcoTamanho3_Off.add(R.drawable.barco3a_off);
+		barcoTamanho3_Off.add(R.drawable.barco3b_off);
+		barcoTamanho3_Off.add(R.drawable.barco3c_off);
+
+		barcoTamanho4_Off = new ArrayList<Integer>();
+		barcoTamanho4_Off.add(R.drawable.barco4a_off);
+		barcoTamanho4_Off.add(R.drawable.barco4b_off);
+		barcoTamanho4_Off.add(R.drawable.barco4c_off);
+		barcoTamanho4_Off.add(R.drawable.barco4d_off);
+
+		
+		
+	}
 	
 }

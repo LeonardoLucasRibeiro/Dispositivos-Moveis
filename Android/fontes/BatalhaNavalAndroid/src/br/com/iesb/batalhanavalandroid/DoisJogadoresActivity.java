@@ -21,6 +21,7 @@ public class DoisJogadoresActivity extends MainActivity {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.main);
 	   
+	    criaHashMapBarcos();
 	    iniciaArtilhariaJogador1();
 	    iniciaArtilhariaJogador2();
 	    artilhariaAdapterCampoA = getArtilhariaAdapterCampoA(); 
