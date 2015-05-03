@@ -113,7 +113,7 @@ public class MainActivity extends Activity {
 				img.setmThumbId(position, imagem);
 				img.setImageView(v,imagem);
 				setVezJogadorA(!isVezJogadorA());
-				setVezJogadorB(!isVezJogadorB());
+				//setVezJogadorB(!isVezJogadorB());
 			}
 	        
 			//Verifica se todos os objetos foram destruios no campo de guerra em questão

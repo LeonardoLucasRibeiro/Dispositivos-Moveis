@@ -52,7 +52,33 @@ public class JogadorComputadorActivity extends MainActivity {
 	    gridviewCampoA.setOnItemClickListener(new OnItemClickListener() {
 	    	public void onItemClick(AdapterView<?> parent, View v,int position, long id) {
 	    		if(isVezJogadorA()){
-	    			analisaTiro(parent, v, position, id, artilhariaAdapterCampoA, lsitaArtilhariaCampoA, JogadorComputadorActivity.this);
+	    				analisaTiro(parent, v, position, id, artilhariaAdapterCampoA, lsitaArtilhariaCampoA, JogadorComputadorActivity.this);
+	    		 
+	
+		    		 Thread thread = new Thread() {          
+		              public void run() {
+			    				
+			    				runOnUiThread(new Runnable() {  
+			                        @Override
+			                        public void run() {
+			                        	if(isVezJogadorB()){
+			                        		try {
+			    								sleep(2000);
+			    							} catch (InterruptedException e) {
+			    								// TODO Auto-generated catch block
+			    								e.printStackTrace();
+			    							}
+											jogadaComputador();
+											
+			                        	}	
+			                        }
+		                        });
+			    			
+			              };
+			          };
+			          thread.start();
+	    			
+	    			
 	    		}
 	        }
 	    	
@@ -68,24 +94,24 @@ public class JogadorComputadorActivity extends MainActivity {
 	    gridviewCampoB.setAdapter(imageAdapter2);
 	    
 	   
-	    
-	    Thread thread = new Thread() {          
-            public void run() {
-                boolean isComputadorJoga = true;
-           
-                    while(isComputadorJoga) {
-                        runOnUiThread(new Runnable() {  
-	                        @Override
-	                        public void run() {
-	                        	if(isVezJogadorB()){
-										jogadaComputador();
-	                        	}	
-	                        }
-                        });
-                    }
-            };
-        };
-        thread.start();	
+//	    
+//	    Thread thread = new Thread() {          
+//            public void run() {
+//                boolean isComputadorJoga = true;
+//           
+//                    while(isComputadorJoga) {
+//                        runOnUiThread(new Runnable() {  
+//	                        @Override
+//	                        public void run() {
+//	                        	if(isVezJogadorB()){
+//										jogadaComputador();
+//	                        	}	
+//	                        }
+//                        });
+//                    }
+//            };
+//        };
+//        thread.start();	
 	
 	    
 	  
