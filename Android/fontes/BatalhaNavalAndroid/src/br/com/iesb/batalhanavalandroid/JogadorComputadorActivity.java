@@ -51,32 +51,35 @@ public class JogadorComputadorActivity extends MainActivity {
 	    gridviewCampoA.setAdapter(imageAdapter);
 	    gridviewCampoA.setOnItemClickListener(new OnItemClickListener() {
 	    	public void onItemClick(AdapterView<?> parent, View v,int position, long id) {
+	    
 	    		if(isVezJogadorA()){
 	    				analisaTiro(parent, v, position, id, artilhariaAdapterCampoA, lsitaArtilhariaCampoA, JogadorComputadorActivity.this);
 	    		 
 	
-		    		 Thread thread = new Thread() {          
-		              public void run() {
-			    				
-			    				runOnUiThread(new Runnable() {  
-			                        @Override
-			                        public void run() {
-			                        	if(isVezJogadorB()){
-			                        		try {
-			    								sleep(2000);
-			    							} catch (InterruptedException e) {
-			    								// TODO Auto-generated catch block
-			    								e.printStackTrace();
-			    							}
-											jogadaComputador();
-											
-			                        	}	
-			                        }
-		                        });
-			    			
-			              };
-			          };
-			          thread.start();
+			    		 Thread thread = new Thread() {          
+			              public void run() {		    				
+				    				runOnUiThread(new Runnable() {  
+				                        @Override
+				                        public void run() {
+				                        	while(isVezJogadorB()){
+				                        		try {
+				    								sleep(1000);
+				    								jogadaComputador();
+				    							} catch (InterruptedException e) {
+				    								// TODO Auto-generated catch block
+				    								e.printStackTrace();
+				    							}
+				                        	}
+				                       
+				                        }
+			                        });
+				    			
+				              };
+				          };
+				          
+				          if(isVezJogadorB()){
+				        	  thread.start();
+				          }  
 	    			
 	    			
 	    		}

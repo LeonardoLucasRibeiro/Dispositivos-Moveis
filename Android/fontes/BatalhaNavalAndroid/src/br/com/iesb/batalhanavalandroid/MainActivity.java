@@ -113,13 +113,15 @@ public class MainActivity extends Activity {
 				img.setmThumbId(position, imagem);
 				img.setImageView(v,imagem);
 				setVezJogadorA(!isVezJogadorA());
-				//setVezJogadorB(!isVezJogadorB());
+				setVezJogadorB(!isVezJogadorB());
 			}
 	        
 			//Verifica se todos os objetos foram destruios no campo de guerra em questão
 			if(artilhariaAdapterCampo.analisaCampoBatalha(lsitaArtilhariaCampo)){
-				Toast.makeText(context, "######## "+artilhariaAdapterCampo.getNomeJogador()+" CAMPEÃO #########" ,Toast.LENGTH_LONG).show();
+				Toast.makeText(context, "### "+artilhariaAdapterCampo.getNomeJogador()+" CAMPEÃO ###" ,Toast.LENGTH_LONG).show();
 			}	
+			
+			
 	}
 
 	
@@ -168,7 +170,7 @@ public class MainActivity extends Activity {
 	        gridview.setAdapter(img);
 			//Verifica se todos os objetos foram destruios no campo de guerra em questão
 			if(artilhariaAdapterCampo.analisaCampoBatalha(lsitaArtilhariaCampo)){
-				Toast.makeText(context, "######## "+artilhariaAdapterCampo.getNomeJogador()+" CAMPEÃO #########" ,Toast.LENGTH_LONG).show();
+				Toast.makeText(context, "### "+artilhariaAdapterCampo.getNomeJogador()+" CAMPEÃO ####" ,Toast.LENGTH_LONG).show();
 			}	
 		
 			return tiro;
